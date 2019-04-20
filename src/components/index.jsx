@@ -1,17 +1,19 @@
 import React ,{Component}from 'react'
-import CoursesList from './CoursesList';
+import CoursesList from './CoursesList'
+import uid from 'uid'
+import {courses} from './data/curses.json'
+
 
 class App extends Component{
     constructor (props){
         super(props)
         this.state={
-            courses:[
-                {id : 1,name:'React desde cero',teacher:'Jonathan Mircha'},
-                {id : 2,name:'React Profecional',teacher:'Mircha'},
-                {id : 3,name:'React Master',teacher:'Jonathan Master'},
-            ]
+            courses: []
         }
         this.handleOnAddCourse = this.handleOnAddCourse.bind(this)
+        this.fetchData = this.fetchData.bind(this)
+        this.resetData = this.resetData.bind(this)
+
     }
     handleOnAddCourse(event){
         console.log('Add')
@@ -30,14 +32,43 @@ class App extends Component{
         console.log(this.state);
     }
 
+    fetchData(){
+        setTimeout(()=> this.setState({ courses:courses}),2000 )//actualiza el estado
+    }
+    resetData(){
+        this.setState({ courses:[]})
+    }
+    componentDidMount(){
+        setTimeout(()=> this.setState({ courses:courses}),2000 )//actualiza el estado
+
+    }
+
     render(){
-        return(
-            <CoursesList 
-            courses={this.state.courses} //eviar pripiedades al hijo
-            onAddCourse={this.handleOnAddCourse}/>
-        )
+        if(!this.state.courses.length){
+            return(
+                <div>
+                    <p>No hay cursos:</p>
+                    <button onClick={this.fetchData}>Cargar Cursos</button>
+                </div>
+            )
+        }else{
+            return(
+                <div>
+                    <CoursesList 
+                    courses={this.state.courses} //eviar pripiedades al hijo
+                    onAddCourse={this.handleOnAddCourse}/>
+                    <button onClick={this.resetData}>Borrar Cursos</button>
+                </div>
+            )
+
+        }
     }
 }
-// App.propTypes = {}
-// App.defaultProps = {}
+// App.propTypes = {
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     teacher: PropTypes.string.isRequired,
+// }
+
+App.defaultProps = {}
 export default App

@@ -1,0 +1,8 @@
+{
+    "courses":[
+        {"id" : 1,"name":"React desde cero","teacher":"Jonathan Mircha"},
+        {"id" : 2,"name":"React Profecional","teacher":"Mircha"},
+        {"id" : 3,"name":"React Master","teacher":"Jonathan Master"},
+        {"id" : 4,"name":"Master","teacher":"Jonathan"}
+    ]
+}
